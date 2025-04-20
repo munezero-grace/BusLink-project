@@ -8,24 +8,27 @@ export default function Home() {
   return (
     <main className="min-h-screen flex flex-col bg-gray-50">
       {/* Hero Section with Bus Image */}
-      <section className="w-full h-[400px] relative">
-        <div className="absolute inset-0 bg-black/30 z-10 flex items-center justify-center">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold text-white mb-4">Your next stop awaits</h1>
-            <button className="bg-blue-400 hover:bg-blue-500 text-white px-6 py-2 rounded-md">
-              Book now
+      <section className="w-full h-[400px] relative overflow-hidden group">
+        <div className="absolute inset-0 bg-black/40 z-10 flex items-center justify-center group-hover:bg-black/30 transition-all duration-500">
+          <div className="text-center px-4 max-w-2xl transform transition-transform duration-500 group-hover:scale-105">
+            <h1 className="text-5xl font-bold text-white mb-6 italic">Your next stop awaits</h1>
+            <button className="bg-blue-400 hover:bg-blue-500 text-white px-8 py-3 rounded-full text-lg font-medium transition-colors duration-300">
+              Book here
             </button>
           </div>
         </div>
         <div className="absolute inset-0">
-          <Image 
-            src="/images/bus-hero.jpg" 
-            alt="Modern blue bus at a station"
-            fill
-            className="object-cover"
-            priority
-            sizes="100vw"
-          />
+          <div className="relative w-full h-full transform transition-transform duration-700 ease-in-out group-hover:scale-105">
+            <Image 
+              src="/images/bus-hero.jpg" 
+              alt="Modern electric bus at a station"
+              fill
+              className="object-cover object-center transition-all duration-700"
+              priority
+              sizes="100vw"
+              quality={90}
+            />
+          </div>
         </div>
       </section>
 

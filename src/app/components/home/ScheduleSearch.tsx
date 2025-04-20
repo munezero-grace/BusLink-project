@@ -5,7 +5,7 @@ export default function ScheduleSearch() {
   return (
     <section className="w-full max-w-4xl mx-auto -mt-16 relative z-20 bg-white rounded-lg shadow-lg p-6">
       <h2 className="text-lg font-semibold mb-2">Find schedule</h2>
-      <p className="text-sm text-gray-600 mb-4">Search routes, view schedules sorted by departure time for a specific bus stop, bus route or station.</p>
+      <p className="text-sm text-gray-600 mb-4">Quickly look up scheduled times for a specific bus stop, bus route or station.</p>
       
       <div className="flex flex-col md:flex-row gap-4">
         <div className="flex-1">

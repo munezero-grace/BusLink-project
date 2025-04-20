@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-rgb: 249, 250, 251;
+  --primary-color: #3b82f6;
+  --secondary-color: #60a5fa;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-blue-500 text-white font-medium py-2 px-4 rounded hover:bg-blue-600 transition duration-300;
+  }
+  
+  .btn-secondary {
+    @apply border border-blue-500 text-blue-500 font-medium py-2 px-4 rounded hover:bg-blue-50 transition duration-300;
+  }
+  
+  .input-field {
+    @apply border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500;
+  }
+  
+  .card {
+    @apply bg-white rounded-lg shadow-md p-6;
+  }
+  
+  .section-title {
+    @apply text-xl font-semibold text-gray-800 mb-4;
+  }
+  
+  .section-subtitle {
+    @apply text-lg font-medium text-gray-700 mb-2;
+  }
+  
+  .text-body {
+    @apply text-gray-600;
+  }
+}
+
+/* Custom styles for the hero section */
+.hero-section {
+  height: 500px;
+  position: relative;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5));
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Bus stop card styles */
+.bus-stop-card {
+  transition: transform 0.3s ease;
+}
+
+.bus-stop-card:hover {
+  transform: translateY(-5px);
+}

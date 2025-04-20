@@ -30,6 +30,7 @@ export default function RootLayout({
             <nav>
               <ul className="flex space-x-6">
                 <li><Link href="/" className="hover:text-primary transition-colors">Home</Link></li>
+                <li><Link href="/about" className="hover:text-primary transition-colors">About Us</Link></li>
                 <li><Link href="/tracking" className="hover:text-primary transition-colors">Bus Tracking</Link></li>
                 <li><Link href="/schedules" className="hover:text-primary transition-colors">Schedules</Link></li>
                 <li><Link href="/contact" className="hover:text-primary transition-colors">Contact</Link></li>

@@ -22,7 +22,7 @@ export default function SignupPage() {
       </div>
       
       {/* Right section (form) - exactly 60% width */}
-      <div className="w-full md:w-[60%] flex flex-col justify-center p-8 bg-white">
+      <div className="w-full md:w-[60%] flex flex-col justify-center p-8">
         <div className="max-w-sm mx-auto">
           <h1 className="text-2xl font-bold text-center mb-6">Create Account</h1>
           

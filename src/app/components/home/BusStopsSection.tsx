@@ -5,12 +5,12 @@ export default function BusStopsSection() {
   return (
     <section className="w-full max-w-4xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold text-gray-800">Our Bus Stops</h2>
+        <h2 className="text-xl font-semibold text-primary-dark">Our Bus Stops</h2>
         <div className="flex gap-2">
-          <button className="p-2 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors duration-300">
+          <button className="p-2 bg-gray-200 text-primary-dark rounded-full hover:bg-primary hover:text-white transition-colors duration-300">
             <FaChevronLeft size={16} />
           </button>
-          <button className="p-2 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors duration-300">
+          <button className="p-2 bg-gray-200 text-primary-dark rounded-full hover:bg-primary hover:text-white transition-colors duration-300">
             <FaChevronRight size={16} />
           </button>
         </div>
@@ -27,7 +27,7 @@ export default function BusStopsSection() {
               className="w-full h-48 object-cover transition-transform duration-500 hover:scale-110"
             />
           </div>
-          <div className="p-3 bg-gray-100">
+          <div className="p-3 bg-primary-dark text-white">
             <h3 className="font-medium">Downtown bus stop</h3>
           </div>
         </div>
@@ -42,7 +42,7 @@ export default function BusStopsSection() {
               className="w-full h-48 object-cover transition-transform duration-500 hover:scale-110"
             />
           </div>
-          <div className="p-3 bg-gray-100">
+          <div className="p-3 bg-primary-dark text-white">
             <h3 className="font-medium">Remera bus stop</h3>
           </div>
         </div>
@@ -57,7 +57,7 @@ export default function BusStopsSection() {
               className="w-full h-48 object-cover transition-transform duration-500 hover:scale-110"
             />
           </div>
-          <div className="p-3 bg-gray-100">
+          <div className="p-3 bg-primary-dark text-white">
             <h3 className="font-medium">Kacyiru bus stop</h3>
           </div>
         </div>

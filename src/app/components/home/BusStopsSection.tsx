@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 export default function BusStopsSection() {
@@ -17,27 +18,39 @@ export default function BusStopsSection() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="rounded-lg overflow-hidden bus-stop-card">
-          <div className="w-full h-48 bg-blue-700 flex items-center justify-center">
-            <span className="text-white font-semibold">Downtown</span>
-          </div>
+          <Image 
+            src="/images/downtown-bus-stop.jpg" 
+            alt="Downtown bus stop" 
+            width={400} 
+            height={250}
+            className="w-full h-48 object-cover"
+          />
           <div className="p-3 bg-gray-100">
             <h3 className="font-medium">Downtown bus stop</h3>
           </div>
         </div>
         
         <div className="rounded-lg overflow-hidden bus-stop-card">
-          <div className="w-full h-48 bg-blue-600 flex items-center justify-center">
-            <span className="text-white font-semibold">Remera</span>
-          </div>
+          <Image 
+            src="/images/remera-bus-stop.jpg" 
+            alt="Remera bus stop" 
+            width={400} 
+            height={250}
+            className="w-full h-48 object-cover"
+          />
           <div className="p-3 bg-gray-100">
             <h3 className="font-medium">Remera bus stop</h3>
           </div>
         </div>
         
         <div className="rounded-lg overflow-hidden bus-stop-card">
-          <div className="w-full h-48 bg-blue-500 flex items-center justify-center">
-            <span className="text-white font-semibold">Kacyiru</span>
-          </div>
+          <Image 
+            src="/images/kacyiru-bus-stop.jpeg" 
+            alt="Kacyiru bus stop" 
+            width={400} 
+            height={250}
+            className="w-full h-48 object-cover"
+          />
           <div className="p-3 bg-gray-100">
             <h3 className="font-medium">Kacyiru bus stop</h3>
           </div>

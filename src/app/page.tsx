@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import ScheduleSearch from './components/home/ScheduleSearch';
 import BusScheduleSection from './components/home/BusScheduleSection';
@@ -16,10 +17,15 @@ export default function Home() {
             </button>
           </div>
         </div>
-        {/* Hero background */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-800 to-blue-600">
-          {/* We'll use a background color gradient instead of an image initially */}
-          {/* In production, replace with an actual image of a bus */}
+        <div className="absolute inset-0">
+          <Image 
+            src="/images/bus-hero.jpg" 
+            alt="Modern blue bus at a station"
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
+          />
         </div>
       </section>
 

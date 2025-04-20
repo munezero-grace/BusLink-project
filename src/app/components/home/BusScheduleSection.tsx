@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 export default function BusScheduleSection() {
@@ -20,9 +21,13 @@ export default function BusScheduleSection() {
       
       <div className="bg-gray-100 rounded-lg p-4 flex flex-col md:flex-row items-center gap-4">
         <div className="w-full md:w-1/3">
-          <div className="bg-blue-200 h-32 w-full rounded-md flex items-center justify-center">
-            <span className="text-blue-800 font-medium">Kigali Map</span>
-          </div>
+          <Image 
+            src="/images/map-preview.jpg" 
+            alt="Kigali bus route map" 
+            width={300} 
+            height={200} 
+            className="w-full rounded-md"
+          />
         </div>
         <div className="w-full md:w-2/3">
           <h3 className="text-lg font-medium mb-2">Discover all destinations</h3>

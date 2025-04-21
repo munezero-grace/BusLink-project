@@ -1,61 +1,135 @@
-import React from 'react';
-import { FaUser, FaLock, FaEye, FaEnvelope } from 'react-icons/fa';
+'use client';
+
+import React, { useState } from 'react';
+import { FaUser, FaLock, FaEye, FaEyeSlash, FaEnvelope } from 'react-icons/fa';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+
+// Test credentials
+const TEST_CREDENTIALS = {
+  ADMIN: {
+    email: 'admin@buslink.com',
+    password: 'admin123'
+  },
+  DRIVER: {
+    email: 'driver@buslink.com',
+    password: 'driver123'
+  },
+  USER: {
+    email: 'user@buslink.com',
+    password: 'user123'
+  }
+};
 
 export default function LoginPage() {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
+  const router = useRouter();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    setError(''); // Clear any existing errors
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Validate form
+    if (!formData.email || !formData.password) {
+      setError('Please fill in all fields');
+      return;
+    }
+    
+    // Check credentials and redirect accordingly
+    if (formData.email === TEST_CREDENTIALS.ADMIN.email && 
+        formData.password === TEST_CREDENTIALS.ADMIN.password) {
+      router.push('/dashboard/admin');
+    } else if (formData.email === TEST_CREDENTIALS.DRIVER.email && 
+               formData.password === TEST_CREDENTIALS.DRIVER.password) {
+      router.push('/dashboard/driver');
+    } else if (formData.email === TEST_CREDENTIALS.USER.email && 
+               formData.password === TEST_CREDENTIALS.USER.password) {
+      router.push('/dashboard/user');
+    } else {
+      setError('Invalid email or password');
+    }
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div className="flex flex-col md:flex-row w-full">
       {/* Left section (form) - exactly 60% width */}
       <div className="w-full md:w-[60%] flex flex-col justify-center p-8 bg-white">
         <div className="max-w-sm mx-auto">
-          <h1 className="text-2xl font-bold text-center mb-6">log in</h1>
-          <p className="text-base text-center text-gray-600 mb-8">or use your account</p>
+          <h1 className="text-2xl font-bold text-center mb-6">Log In</h1>
+          <p className="text-base text-center text-gray-600 mb-4">Use your account credentials</p>
+          
+          {/* Test credentials info */}
+          <div className="mb-6 p-3 bg-blue-50 rounded-md text-sm">
+            <p className="font-semibold text-blue-800 mb-1">Test Credentials:</p>
+            <p className="text-blue-700">Admin: admin@buslink.com / admin123</p>
+            <p className="text-blue-700">Driver: driver@buslink.com / driver123</p>
+            <p className="text-blue-700">User: user@buslink.com / user123</p>
+          </div>
+          
+          {/* Error message */}
+          {error && (
+            <div className="mb-4 p-3 bg-red-50 text-red-700 rounded-md text-sm">
+              {error}
+            </div>
+          )}
           
           {/* Login Form */}
-          <form>
-            {/* Username Field */}
-            <div className="mb-4">
-              <div className="flex items-center bg-gray-200 rounded-md">
-                <span className="pl-3 pr-2">
-                  <FaUser className="text-gray-500" />
-                </span>
-                <input 
-                  type="text" 
-                  placeholder="user name"
-                  className="w-full bg-gray-200 py-3 px-2 rounded-md focus:outline-none" 
-                />
-              </div>
-            </div>
-            
-            {/* Email/Phone Field */}
+          <form onSubmit={handleSubmit}>
+            {/* Email Field */}
             <div className="mb-4">
               <div className="flex items-center bg-gray-200 rounded-md">
                 <span className="pl-3 pr-2">
                   <FaEnvelope className="text-gray-500" />
                 </span>
                 <input 
-                  type="text" 
-                  placeholder="Email or phone number"
+                  type="email" 
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="Email address"
                   className="w-full bg-gray-200 py-3 px-2 rounded-md focus:outline-none" 
                 />
               </div>
-              <div className="border-b border-gray-400 mt-1"></div>
             </div>
             
             {/* Password Field */}
-            <div className="mb-8">
+            <div className="mb-6">
               <div className="flex items-center bg-gray-200 rounded-md">
                 <span className="pl-3 pr-2">
                   <FaLock className="text-gray-500" />
                 </span>
                 <input 
-                  type="password" 
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
                   placeholder="Password"
-                  className="w-full bg-gray-200 py-3 px-2 rounded-md focus:outline-none pr-10" 
+                  className="w-full bg-gray-200 py-3 px-2 rounded-md focus:outline-none" 
                 />
-                <span className="pr-3 cursor-pointer">
-                  <FaEye className="text-gray-500" />
-                </span>
+                <button 
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="pr-3"
+                >
+                  {showPassword ? 
+                    <FaEyeSlash className="text-gray-500" /> : 
+                    <FaEye className="text-gray-500" />
+                  }
+                </button>
               </div>
             </div>
             
@@ -63,9 +137,9 @@ export default function LoginPage() {
             <div className="mb-8">
               <button 
                 type="submit" 
-                className="w-full bg-blue-400 text-white py-2 rounded-full hover:bg-blue-500 transition-colors"
+                className="w-full bg-primary text-white py-2 rounded-full hover:bg-primary-light transition-colors"
               >
-                sign in
+                Sign In
               </button>
             </div>
             
@@ -95,9 +169,9 @@ export default function LoginPage() {
       {/* Right section (blue background) - exactly 40% width */}
       <div className="hidden md:flex md:w-[40%] bg-primary-dark text-white flex-col justify-center p-8">
         <div className="max-w-xs mx-auto">
-          <h2 className="text-2xl font-bold mb-4">welcome friends</h2>
+          <h2 className="text-2xl font-bold mb-4">Welcome Back</h2>
           <p className="text-sm mb-8">
-            Enter your personal details and start journey with us
+            Don't have an account yet? Sign up now to access all BusLink features.
           </p>
           <Link 
             href="/auth/signup" 

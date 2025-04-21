@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { FaBus, FaEdit, FaTrash } from 'react-icons/fa';
+import { FaSearch } from 'react-icons/fa';
 
 // Sample bus data
 const initialBuses = [
@@ -13,105 +13,138 @@ const initialBuses = [
   { id: 6, name: 'NY-kicukiro', licensePlate: 'NP 345 C', departureTime: '01/06/2023 09:00', arrivalTime: '01/06/2023 10:30' },
   { id: 7, name: 'NY-kicukiro', licensePlate: 'NP 345 C', departureTime: '01/06/2023 09:00', arrivalTime: '01/06/2023 10:30' },
   { id: 8, name: 'NY-kicukiro', licensePlate: 'NP 345 C', departureTime: '01/06/2023 09:00', arrivalTime: '01/06/2023 10:30' },
-  { id: 9, name: 'RY-remera', licensePlate: 'NP 346 C', departureTime: '01/06/2023 10:00', arrivalTime: '01/06/2023 11:30' },
-  { id: 10, name: 'KM-kimironko', licensePlate: 'NP 347 C', departureTime: '01/06/2023 08:00', arrivalTime: '01/06/2023 09:30' },
-  { id: 11, name: 'KG-kacyiru', licensePlate: 'NP 348 C', departureTime: '01/06/2023 07:00', arrivalTime: '01/06/2023 08:30' },
-  { id: 12, name: 'KN-kanombe', licensePlate: 'NP 349 C', departureTime: '01/06/2023 07:30', arrivalTime: '01/06/2023 09:00' },
 ];
 
 export default function BusManagement() {
-  const [buses, setBuses] = useState(initialBuses);
+  const [buses] = useState(initialBuses);
   const [searchTerm, setSearchTerm] = useState('');
-  
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
   // Filter buses based on search term
   const filteredBuses = buses.filter(bus => 
     bus.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    bus.licensePlate.toLowerCase().includes(searchTerm.toLowerCase())
+    bus.licensePlate.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    bus.departureTime.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    bus.arrivalTime.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // Pagination logic
+  const indexOfLastBus = currentPage * itemsPerPage;
+  const indexOfFirstBus = indexOfLastBus - itemsPerPage;
+  const currentBuses = filteredBuses.slice(indexOfFirstBus, indexOfLastBus);
+  const totalPages = Math.ceil(filteredBuses.length / itemsPerPage);
+
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-6">Bus Management</h1>
+    <div className="w-full">
+      <h1 className="text-2xl font-bold mb-6 text-primary-dark">Bus Management</h1>
       
-      {/* Search and Add Bus Section */}
-      <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
-        <div className="relative w-full md:w-auto">
+      {/* Search Section */}
+      <div className="mb-6">
+        <div className="relative max-w-md">
           <input
             type="text"
             placeholder="Search buses..."
-            className="pl-4 pr-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary w-full md:w-64"
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <span className="absolute right-3 top-2.5 text-gray-400">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-          </span>
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <FaSearch className="text-gray-400" />
+          </div>
         </div>
-        
-        <button className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-light transition-colors w-full md:w-auto flex items-center justify-center">
-          <FaBus className="mr-2" />
-          Add New Bus
-        </button>
       </div>
       
       {/* Buses Table */}
-      <div className="overflow-x-auto">
-        <table className="w-full bg-white border-collapse">
+      <div className="overflow-x-auto w-full bg-white rounded-lg shadow">
+        <table className="w-full border-collapse">
           <thead>
             <tr className="bg-primary-dark text-white">
-              <th className="py-3 px-4 text-left">Bus</th>
-              <th className="py-3 px-4 text-left">License plate</th>
-              <th className="py-3 px-4 text-left">Departure time</th>
-              <th className="py-3 px-4 text-left">Arrival time</th>
-              <th className="py-3 px-4 text-left">Actions</th>
+              <th className="py-4 px-6 text-left font-medium">Bus</th>
+              <th className="py-4 px-6 text-left font-medium">License plate</th>
+              <th className="py-4 px-6 text-left font-medium">Departure time</th>
+              <th className="py-4 px-6 text-left font-medium">Arrival time</th>
             </tr>
           </thead>
           <tbody>
-            {filteredBuses.map((bus, index) => (
-              <tr key={bus.id} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                <td className="py-3 px-4 border-b border-gray-200">{bus.name}</td>
-                <td className="py-3 px-4 border-b border-gray-200">{bus.licensePlate}</td>
-                <td className="py-3 px-4 border-b border-gray-200">{bus.departureTime}</td>
-                <td className="py-3 px-4 border-b border-gray-200">{bus.arrivalTime}</td>
-                <td className="py-3 px-4 border-b border-gray-200">
-                  <div className="flex space-x-2">
-                    <button className="text-blue-500 hover:text-blue-700">
-                      <FaEdit />
-                    </button>
-                    <button className="text-red-500 hover:text-red-700">
-                      <FaTrash />
-                    </button>
-                  </div>
-                </td>
+            {currentBuses.map((bus, index) => (
+              <tr 
+                key={bus.id} 
+                className={`
+                  border-b border-gray-200 hover:bg-gray-50 transition-colors
+                  ${index === currentBuses.length - 1 ? 'border-b-0' : ''}
+                `}
+              >
+                <td className="py-4 px-6">{bus.name}</td>
+                <td className="py-4 px-6">{bus.licensePlate}</td>
+                <td className="py-4 px-6">{bus.departureTime}</td>
+                <td className="py-4 px-6">{bus.arrivalTime}</td>
               </tr>
             ))}
+            {currentBuses.length === 0 && (
+              <tr>
+                <td colSpan={4} className="py-8 text-center text-gray-500">
+                  No buses found matching your search.
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
       
       {/* Pagination */}
-      <div className="flex justify-between items-center mt-4">
-        <div className="text-sm text-gray-500">
-          Showing {filteredBuses.length} of {buses.length} buses
+      {totalPages > 1 && (
+        <div className="mt-6 flex justify-between items-center">
+          <div className="text-sm text-gray-600">
+            Showing {indexOfFirstBus + 1} to {Math.min(indexOfLastBus, filteredBuses.length)} of {filteredBuses.length} buses
+          </div>
+          
+          <div className="flex space-x-1">
+            <button 
+              onClick={() => paginate(Math.max(1, currentPage - 1))}
+              disabled={currentPage === 1}
+              className={`
+                px-3 py-1 rounded-md
+                ${currentPage === 1 
+                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
+                  : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50'}
+              `}
+            >
+              Previous
+            </button>
+            
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map(number => (
+              <button
+                key={number}
+                onClick={() => paginate(number)}
+                className={`
+                  px-3 py-1 rounded-md
+                  ${currentPage === number
+                    ? 'bg-primary text-white'
+                    : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50'}
+                `}
+              >
+                {number}
+              </button>
+            ))}
+            
+            <button 
+              onClick={() => paginate(Math.min(totalPages, currentPage + 1))}
+              disabled={currentPage === totalPages}
+              className={`
+                px-3 py-1 rounded-md
+                ${currentPage === totalPages
+                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                  : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-50'}
+              `}
+            >
+              Next
+            </button>
+          </div>
         </div>
-        
-        <div className="flex space-x-2">
-          <button className="px-3 py-1 border border-gray-300 rounded-md hover:bg-gray-100 transition-colors">
-            Previous
-          </button>
-          <button className="px-3 py-1 bg-primary text-white rounded-md hover:bg-primary-light transition-colors">
-            1
-          </button>
-          <button className="px-3 py-1 border border-gray-300 rounded-md hover:bg-gray-100 transition-colors">
-            2
-          </button>
-          <button className="px-3 py-1 border border-gray-300 rounded-md hover:bg-gray-100 transition-colors">
-            Next
-          </button>
-        </div>
-      </div>
+      )}
     </div>
   );
 }

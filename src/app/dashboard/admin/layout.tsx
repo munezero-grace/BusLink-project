@@ -15,7 +15,8 @@ import {
   FaSun, 
   FaBell, 
   FaSearch,
-  FaSignOutAlt
+  FaSignOutAlt,
+  FaTicketAlt
 } from 'react-icons/fa';
 
 export default function AdminDashboardLayout({
@@ -69,6 +70,15 @@ export default function AdminDashboardLayout({
               >
                 <FaBus className="mr-3" />
                 <span>Bus manage</span>
+              </Link>
+            </li>
+            <li>
+              <Link 
+                href="/dashboard/admin/bookings" 
+                className={`flex items-center px-5 py-3 hover:bg-primary transition-colors ${isActive('/bookings') ? 'bg-primary' : ''}`}
+              >
+                <FaTicketAlt className="mr-3" />
+                <span>Bookings</span>
               </Link>
             </li>
             <li>

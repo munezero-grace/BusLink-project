@@ -153,3 +153,67 @@ footer .social-icon:hover {
 .animate-fadeIn {
   animation: fadeIn var(--transition-medium) ease-in-out;
 }
+
+/* Map and tracking page styles */
+#map {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.tracking-panel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--primary-dark);
+  color: white;
+  z-index: 2;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.bus-marker {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  border: 2px solid white;
+}
+
+.stop-marker {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.start-marker {
+  background-color: #4CAF50;
+}
+
+.end-marker {
+  background-color: #FF5722;
+}
+
+/* Schedules page styles */
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.schedule-card {
+  transition: all 0.3s ease;
+}
+
+.schedule-card:hover {
+  transform: translateY(-4px);
+}

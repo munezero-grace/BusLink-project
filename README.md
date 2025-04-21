@@ -17,6 +17,13 @@ If you're setting up the project for the first time:
 2. Run the setup script:
    - Double-click `setup-nextjs.bat` (Windows)
    - This will install all required dependencies
+3. Configure Google Maps API:
+   - Create a Google Maps API key at [Google Cloud Console](https://console.cloud.google.com/)
+   - Enable the Maps JavaScript API and Geocoding API
+   - Add your API key to the `.env.local` file:
+     ```
+     NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_api_key_here
+     ```
 
 ### Running the Project
 
@@ -31,11 +38,13 @@ To run the project locally:
 
 ## Features
 
-- Real-time bus tracking
-- Route planning
+- Real-time bus tracking with Google Maps integration
+- Route planning and visualization
 - Schedule viewing
 - Ticket booking
 - District-wise route information
+- Contact form for user feedback
+- Driver information and calling functionality
 
 ## Project Structure
 

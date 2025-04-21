@@ -17,13 +17,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  // Check if the current route is login or signup to hide header and footer
+  // Check if the current route is login, signup, or dashboard to hide header and footer
   const isAuthPage = (children as any)?.props?.childProp?.segment === 'auth';
+  const isDashboardPage = (children as any)?.props?.childProp?.segment === 'dashboard';
   
   return (
     <html lang="en">
       <body className={inter.className}>
-        {!isAuthPage && (
+        {!isAuthPage && !isDashboardPage && (
           <header className="bg-primary-dark text-white shadow">
             <div className="container mx-auto py-4 px-6 flex justify-between items-center">
               <div className="flex items-center space-x-2">
@@ -45,8 +46,6 @@ export default function RootLayout({
         )}
         
         {children}
-        
-        {!isAuthPage && <Footer />}
       </body>
     </html>
   )

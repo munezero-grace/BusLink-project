@@ -12,9 +12,9 @@ export default function Home() {
         <div className="absolute inset-0 bg-primary-dark/70 z-10 flex items-center justify-center group-hover:bg-primary-dark/60 transition-all duration-500">
           <div className="text-center px-4 max-w-2xl transform transition-transform duration-500 group-hover:scale-105">
             <h1 className="text-5xl font-bold text-white mb-6 italic">Your next stop awaits</h1>
-            <button className="bg-primary hover:bg-primary-light text-white px-8 py-3 rounded-full text-lg font-medium transition-colors duration-300">
+            <Link href="/booking" className="bg-primary hover:bg-primary-light text-white px-8 py-3 rounded-full text-lg font-medium transition-colors duration-300 inline-block">
               Book here
-            </button>
+            </Link>
           </div>
         </div>
         <div className="absolute inset-0">

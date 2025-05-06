@@ -3,6 +3,9 @@ import Link from 'next/link';
 import ScheduleSearch from './components/home/ScheduleSearch';
 import BusScheduleSection from './components/home/BusScheduleSection';
 import BusStopsSection from './components/home/BusStopsSection';
+import SocietalImpact from './components/home/SocietalImpact';
+import TransportChallenges from './components/home/TransportChallenges';
+import BenefitsVisual from './components/home/BenefitsVisual';
 
 export default function Home() {
   return (
@@ -34,9 +37,18 @@ export default function Home() {
 
       {/* Schedule Search Form */}
       <ScheduleSearch />
+      
+      {/* Societal Impact Section */}
+      <SocietalImpact />
+      
+      {/* Transport Challenges in Rwanda */}
+      <TransportChallenges />
 
       {/* Bus Schedule Section */}
       <BusScheduleSection />
+
+      {/* Benefits Visualization */}
+      <BenefitsVisual />
 
       {/* Get Cheap Tickets Section */}
       <section className="w-full max-w-4xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">

@@ -14,7 +14,8 @@ import {
   FaMoon, 
   FaSun, 
   FaBell, 
-  FaSearch
+  FaSearch,
+  FaSignOutAlt
 } from 'react-icons/fa';
 import LogoutButton from '@/app/components/shared/LogoutButton';
 
@@ -112,12 +113,20 @@ export default function DriverDashboardLayout({
                 <span>Help center</span>
               </Link>
             </li>
+            <li>
+              <div className="px-5 py-3">
+                <LogoutButton 
+                  variant="full" 
+                  className="w-full flex items-center justify-start text-left hover:text-red-300 transition-colors"
+                />
+              </div>
+            </li>
           </ul>
         </nav>
         
-        {/* Theme Toggle and Logout */}
+        {/* Theme Toggle */}
         <div className="p-4 border-t border-gray-700">
-          <div className="flex items-center justify-between bg-gray-700 rounded-full p-1 mb-3">
+          <div className="flex items-center justify-between bg-gray-700 rounded-full p-1">
             <button 
               onClick={() => setDarkMode(false)}
               className={`flex items-center justify-center rounded-full p-2 ${!darkMode ? 'bg-blue-400 text-white' : 'text-gray-400'}`}
@@ -133,12 +142,6 @@ export default function DriverDashboardLayout({
               <span className="ml-2 text-sm">Dark</span>
             </button>
           </div>
-          
-          {/* Logout Button in Sidebar */}
-          <LogoutButton 
-            variant="full" 
-            className="w-full bg-gray-700 hover:bg-gray-600 text-white hover:text-white"
-          />
         </div>
       </div>
       
@@ -157,7 +160,7 @@ export default function DriverDashboardLayout({
               <FaSearch className="absolute left-3 top-3 text-gray-400" />
             </div>
             
-            {/* User Profile, Notifications and Logout */}
+            {/* User Profile and Notifications */}
             <div className="flex items-center space-x-4">
               <button className="relative p-2">
                 <FaBell className="text-gray-500" />
@@ -174,8 +177,10 @@ export default function DriverDashboardLayout({
                   <p className="text-xs text-gray-500">driver@buslink.com</p>
                 </div>
               </div>
-              {/* Logout Button in Header (Icon Only) */}
-              <LogoutButton variant="icon" />
+              {/* For mobile, keep logout in header */}
+              <div className="md:hidden">
+                <LogoutButton variant="icon" />
+              </div>
             </div>
           </div>
         </header>

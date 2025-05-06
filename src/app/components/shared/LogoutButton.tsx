@@ -46,13 +46,13 @@ const LogoutButton = ({ variant = 'full', className = '' }: LogoutButtonProps) =
     );
   }
 
-  // Default full variant
+  // Default full variant - now styled to match sidebar navigation items
   return (
     <button 
       onClick={handleLogout}
-      className={`flex items-center gap-2 px-4 py-2 rounded-md bg-gray-100 hover:bg-gray-200 text-gray-700 hover:text-red-500 transition-colors ${className}`}
+      className={`flex items-center gap-2 text-gray-300 hover:text-red-300 transition-colors ${className}`}
     >
-      <FaSignOutAlt /> Logout
+      <FaSignOutAlt className="mr-3" /> Logout
     </button>
   );
 };

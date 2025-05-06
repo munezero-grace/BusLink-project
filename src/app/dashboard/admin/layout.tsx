@@ -15,9 +15,9 @@ import {
   FaSun, 
   FaBell, 
   FaSearch,
-  FaSignOutAlt,
   FaTicketAlt
 } from 'react-icons/fa';
+import LogoutButton from '@/app/components/shared/LogoutButton';
 
 export default function AdminDashboardLayout({
   children,
@@ -125,9 +125,9 @@ export default function AdminDashboardLayout({
           </ul>
         </nav>
         
-        {/* Theme Toggle */}
+        {/* Theme Toggle and Logout */}
         <div className="p-4 border-t border-gray-700">
-          <div className="flex items-center justify-between bg-gray-700 rounded-full p-1">
+          <div className="flex items-center justify-between bg-gray-700 rounded-full p-1 mb-3">
             <button 
               onClick={() => setDarkMode(false)}
               className={`flex items-center justify-center rounded-full p-2 ${!darkMode ? 'bg-blue-400 text-white' : 'text-gray-400'}`}
@@ -143,6 +143,12 @@ export default function AdminDashboardLayout({
               <span className="ml-2 text-sm">Dark</span>
             </button>
           </div>
+          
+          {/* Logout Button in Sidebar */}
+          <LogoutButton 
+            variant="full" 
+            className="w-full bg-gray-700 hover:bg-gray-600 text-white hover:text-white"
+          />
         </div>
       </div>
       
@@ -161,7 +167,7 @@ export default function AdminDashboardLayout({
               <FaSearch className="absolute left-3 top-3 text-gray-400" />
             </div>
             
-            {/* User Profile and Notifications */}
+            {/* User Profile, Notifications and Logout */}
             <div className="flex items-center space-x-4">
               <button className="relative p-2">
                 <FaBell className="text-gray-500" />
@@ -178,9 +184,8 @@ export default function AdminDashboardLayout({
                   <p className="text-xs text-gray-500">tristannook@gmail.com</p>
                 </div>
               </div>
-              <Link href="/auth/login" className="p-2 text-gray-500 hover:text-red-500">
-                <FaSignOutAlt />
-              </Link>
+              {/* Logout Button in Header (Icon Only) */}
+              <LogoutButton variant="icon" />
             </div>
           </div>
         </header>

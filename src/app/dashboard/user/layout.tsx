@@ -5,20 +5,21 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { 
   FaTachometerAlt, 
-  FaUsers, 
-  FaUserCircle, 
-  FaChartLine, 
-  FaExclamationTriangle, 
+  FaTicketAlt, 
+  FaHistory, 
+  FaMapMarkedAlt, 
+  FaCreditCard, 
   FaCog, 
   FaQuestionCircle, 
   FaMoon, 
   FaSun, 
   FaBell, 
-  FaSearch
+  FaSearch,
+  FaUserCircle
 } from 'react-icons/fa';
 import LogoutButton from '@/app/components/shared/LogoutButton';
 
-export default function DriverDashboardLayout({
+export default function UserDashboardLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -27,7 +28,7 @@ export default function DriverDashboardLayout({
   const pathname = usePathname();
 
   const isActive = (path: string) => {
-    return pathname === `/dashboard/driver${path}`;
+    return pathname === `/dashboard/user${path}`;
   };
 
   return (
@@ -36,7 +37,7 @@ export default function DriverDashboardLayout({
       <div className="w-64 bg-primary-dark text-white flex flex-col">
         {/* Logo */}
         <div className="p-5 border-b border-gray-700">
-          <Link href="/dashboard/driver" className="flex items-center">
+          <Link href="/dashboard/user" className="flex items-center">
             <h1 className="text-white text-2xl font-bold">BUS <span className="text-blue-400">link</span></h1>
           </Link>
         </div>
@@ -46,7 +47,7 @@ export default function DriverDashboardLayout({
           <ul>
             <li>
               <Link 
-                href="/dashboard/driver" 
+                href="/dashboard/user" 
                 className={`flex items-center px-5 py-3 hover:bg-primary transition-colors ${isActive('') ? 'bg-primary' : ''}`}
               >
                 <FaTachometerAlt className="mr-3" />
@@ -55,29 +56,38 @@ export default function DriverDashboardLayout({
             </li>
             <li>
               <Link 
-                href="/dashboard/driver/passengers" 
-                className={`flex items-center px-5 py-3 hover:bg-primary transition-colors ${isActive('/passengers') ? 'bg-primary' : ''}`}
+                href="/dashboard/user/bookings" 
+                className={`flex items-center px-5 py-3 hover:bg-primary transition-colors ${isActive('/bookings') ? 'bg-primary' : ''}`}
               >
-                <FaUsers className="mr-3" />
-                <span>Passengers</span>
+                <FaTicketAlt className="mr-3" />
+                <span>My Bookings</span>
               </Link>
             </li>
             <li>
               <Link 
-                href="/dashboard/driver/bus-manage" 
-                className={`flex items-center px-5 py-3 hover:bg-primary transition-colors ${isActive('/bus-manage') ? 'bg-primary' : ''}`}
+                href="/dashboard/user/history" 
+                className={`flex items-center px-5 py-3 hover:bg-primary transition-colors ${isActive('/history') ? 'bg-primary' : ''}`}
               >
-                <FaChartLine className="mr-3" />
-                <span>Bus manage</span>
+                <FaHistory className="mr-3" />
+                <span>Travel History</span>
               </Link>
             </li>
             <li>
               <Link 
-                href="/dashboard/driver/profile" 
-                className={`flex items-center px-5 py-3 hover:bg-primary transition-colors ${isActive('/profile') ? 'bg-primary' : ''}`}
+                href="/dashboard/user/routes" 
+                className={`flex items-center px-5 py-3 hover:bg-primary transition-colors ${isActive('/routes') ? 'bg-primary' : ''}`}
               >
-                <FaUserCircle className="mr-3" />
-                <span>My Profile</span>
+                <FaMapMarkedAlt className="mr-3" />
+                <span>Routes</span>
+              </Link>
+            </li>
+            <li>
+              <Link 
+                href="/dashboard/user/payment" 
+                className={`flex items-center px-5 py-3 hover:bg-primary transition-colors ${isActive('/payment') ? 'bg-primary' : ''}`}
+              >
+                <FaCreditCard className="mr-3" />
+                <span>Payment Methods</span>
               </Link>
             </li>
           </ul>
@@ -87,16 +97,16 @@ export default function DriverDashboardLayout({
           <ul>
             <li>
               <Link 
-                href="/dashboard/driver/alerts" 
-                className={`flex items-center px-5 py-3 hover:bg-primary transition-colors ${isActive('/alerts') ? 'bg-primary' : ''}`}
+                href="/dashboard/user/profile" 
+                className={`flex items-center px-5 py-3 hover:bg-primary transition-colors ${isActive('/profile') ? 'bg-primary' : ''}`}
               >
-                <FaExclamationTriangle className="mr-3" />
-                <span>Alerts</span>
+                <FaUserCircle className="mr-3" />
+                <span>My Profile</span>
               </Link>
             </li>
             <li>
               <Link 
-                href="/dashboard/driver/settings" 
+                href="/dashboard/user/settings" 
                 className={`flex items-center px-5 py-3 hover:bg-primary transition-colors ${isActive('/settings') ? 'bg-primary' : ''}`}
               >
                 <FaCog className="mr-3" />
@@ -105,7 +115,7 @@ export default function DriverDashboardLayout({
             </li>
             <li>
               <Link 
-                href="/dashboard/driver/help" 
+                href="/dashboard/user/help" 
                 className={`flex items-center px-5 py-3 hover:bg-primary transition-colors ${isActive('/help') ? 'bg-primary' : ''}`}
               >
                 <FaQuestionCircle className="mr-3" />
@@ -151,7 +161,7 @@ export default function DriverDashboardLayout({
             <div className="relative w-64">
               <input 
                 type="text" 
-                placeholder="Search..." 
+                placeholder="Search for routes, bookings..." 
                 className={`w-full pl-10 pr-4 py-2 rounded-lg ${darkMode ? 'bg-gray-700 text-white border-gray-600' : 'bg-gray-100 border-gray-300'} border`}
               />
               <FaSearch className="absolute left-3 top-3 text-gray-400" />
@@ -166,12 +176,12 @@ export default function DriverDashboardLayout({
               <div className="flex items-center">
                 <img 
                   src="https://via.placeholder.com/40" 
-                  alt="Driver" 
+                  alt="User" 
                   className="w-8 h-8 rounded-full mr-2" 
                 />
                 <div>
-                  <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-800'}`}>John Driver</p>
-                  <p className="text-xs text-gray-500">driver@buslink.com</p>
+                  <p className={`text-sm font-medium ${darkMode ? 'text-white' : 'text-gray-800'}`}>John User</p>
+                  <p className="text-xs text-gray-500">user@example.com</p>
                 </div>
               </div>
               {/* Logout Button in Header (Icon Only) */}
